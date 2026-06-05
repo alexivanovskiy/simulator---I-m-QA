@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Интерактивный тренажёр — Тестировщик сайтов</title>
+    <link rel="stylesheet" href="static/styles/style.css">
+</head>
+
+<body>
+    <div class="container">
+        <div class="entry">
+            <h1>Интерактивный тренажёр — Тестировщик сайтов</h1>
+            <img class="logo" src="static/images/2026-05-12_10-11-57.png" alt="картинка программиста">
+            <p id="welcome-message">Попробуй себя в роли Тестировщика и узнай подходит ли тебе эта профессия💻</p>
+        </div>
+        
+        <div class="information">
+            <div class="card-list">
+                <div class="card-item card-item--primary">
+                    <div>
+                        <h2>Тестировщик — это «детектор ошибок» 🔍</h2>
+                        <p>Представьте, что создаётся новый продукт: будь то сложная компьютерная программа или
+                            современный
+                            бытовой
+                            прибор. Чтобы он работал идеально и не подвёл пользователя, его нужно тщательно проверить.
+                        </p>
+                    </div>
+                    <div>
+                        <img src="static/images/photo detector.jpg" alt="photo detector">
+                    </div>
+                </div>
+                <div class="card-item card-item--secondary">
+                    <h2>Что он делает?</h2>
+                    <p>Тестировщик специально ищет слабые места и ошибки («баги»). Он проверяет систему на прочность,
+                        нажимает
+                        на все кнопки и пытается найти ситуации, в которых всё может сломаться. Его цель —
+                        гарантировать,
+                        что
+                        готовый продукт будет надёжным, качественным и удобным для каждого. ✅</p>
+                </div>
+
+
+            </div>
+
+        </div>
+
+        <div class="module">
+            <!-- Задание 1 -->
+            <div class="task" data-task-id="1">
+                <span>Задание 1</span>
+                <h2 class="text-start">
+                    Перед тобой изображение с кнопками, посмотри и скажи есть ли тут ошибка
+                </h2>
+                <img class="photo2" src="static/images/2026-05-13_12-32-54.png" alt="Задание 1">
+                <h2 class="test_results">Результат тестирования</h2>
+                <div class="options">
+                    <div class="text-box">
+                        <a href="#" class="btn btn-white" data-answer="error">Есть ошибка</a>
+                    </div>
+                    <div class="text-box">
+                        <a href="#" class="btn btn-white" data-answer="no-error">Ошибки нет</a>
+                    </div>
+                </div>
+                <!-- Контейнер для обратной связи -->
+                <div class="feedback-container"></div>
+            </div>
+
+            <!-- Задание 2 -->
+            <div class="task task-2 hidden" data-task-id="2">
+                <span>Задание 2</span>
+                <h2>
+                    Вот тебе следующее задание. Всё ли здесь хорошо?
+                </h2>
+                <img class="photo3" src="static/images/photo3.png" alt="Задание 2">
+                <h2 class="test_results">Результат тестирования</h2>
+                <div class="options">
+                    <div class="text-box">
+                        <a href="#" class="btn btn-white" data-answer="error">Есть ошибка</a>
+                    </div>
+                    <div class="text-box">
+                        <a href="#" class="btn btn-white" data-answer="no-error">Ошибки нет</a>
+                    </div>
+                </div>
+                <!-- Контейнер для обратной связи -->
+                <div class="feedback-container"></div>
+            </div>
+            <!-- Задание 3 -->
+            <div class="task task-3 hidden" data-task-id="3">
+                <span>Задание 3</span>
+                <h2>Проверь как работает кнопка "купить" и кнопка ♡</h2>
+                <div class="product-card">
+                    <img class="photo4" src="static/images/photo_tools.jpg" alt="картинка инструменты">
+                    <h3>3450 руб.</h3>
+                    <p>Набор инструментов</p>
+                    <div class="product-actions">
+                        <button type="button" class="btn btn-buy-primary">Купить</button>
+                        <button type="button" class="btn btn-favorite-classic" aria-label="Добавить в избранное">
+                            <span class="heart-icon">♡</span>
+                        </button>
+                    </div>
+                    
+                </div>
+                <div id="cart-notification" class="cart-notification hidden">
+                    Товар успешно добавлен в корзину! ✅
+                </div>
+                <h2 class="test_results">Результат тестирования</h2>
+                <div class="options">
+                    <div class="text-box">
+                        <a href="#" class="btn btn-white" data-answer="error">Есть ошибка</a>
+                    </div>
+                    <div class="text-box">
+                        <a href="#" class="btn btn-white" data-answer="no-error">Ошибки нет</a>
+                    </div>
+                </div>
+
+                <!-- Контейнер для обратной связи -->
+                <div class="feedback-container"></div>
+
+            </div>
+
+            <!-- Задание 4 -->
+            <div class="task task-4 hidden" data-task-id="4">
+                <span>Задание 4</span>
+                <h2>Проверь заново работу кнопок</h2>
+                <div class="product-card">
+                    <img class="photo4" src="static/images/photo_tools.jpg" alt="картинка инструменты">
+                    <h3>3450 руб.</h3>
+                    <p>Набор инструментов</p>
+                    <div class="product-actions">
+                        <button type="button" class="btn btn-buy-primary2">Купить</button>
+                        <button type="button" class="btn btn-favorite-classic2" aria-label="Добавить в избранное">
+                            <span class="heart-icon2">♡</span>
+                        </button>
+                    </div>
+                    
+                </div>
+                <div id="cart-notification2" class="cart-notification hidden">
+                    Товар успешно добавлен в корзину! ✅
+                </div>
+                <h2 class="test_results">Результат тестирования</h2>
+                <div class="options">
+                    <div class="text-box">
+                        <a href="#" class="btn btn-white" data-answer="error">Есть ошибка</a>
+                    </div>
+                    <div class="text-box">
+                        <a href="#" class="btn btn-white" data-answer="no-error">Ошибки нет</a>
+                    </div>
+                </div>
+
+                <!-- Контейнер для обратной связи -->
+                <div class="feedback-container"></div>
+
+            </div>
+
+            <!-- Задание 5 -->
+            <div class="task task-5 hidden" data-task-id="5">
+                <span>Задание 5</span>
+                <h2>А теперь уменьши экран на компьютере и посмотри, <br> все ли стоит ровно или текст наезжает друг на друга</h2>
+                <span>Ниже подсказка как это сделать</span>
+                <div class="product-card">
+                    <img class="" src="static/images/page_size.png" alt="размер страницы">
+                </div>
+                <h2 class="test_results">Результат тестирования</h2>
+                <div class="options">
+                    <div class="text-box">
+                        <a href="#" class="btn btn-white" data-answer="error">Есть ошибка</a>
+                    </div>
+                    <div class="text-box">
+                        <a href="#" class="btn btn-white" data-answer="no-error">Ошибки нет</a>
+                    </div>
+                </div>
+
+                <!-- Контейнер для обратной связи -->
+                <div class="feedback-container"></div>
+
+            </div>
+
+        </div>
+    </div>
+    <footer>
+
+    </footer>
+    <script src="static/js/main.js"></script>
+</body>
+
+</html>
