@@ -5,11 +5,18 @@
   box-sizing: border-box;
 }
 
+html, body {
+  height: 100%;
+}
+
 body {
   font-family: 'Inter', 'Manrope', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
   line-height: 1.6;
   color: #333;
+  margin: 0;
+  padding: 0;
 }
+
 
 /* =====================================
   2. ТИПОГРАФИКА
@@ -81,7 +88,8 @@ a {
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin: 5%;
+    margin: 0;
+    padding: 20px;
     
 
  }
@@ -266,7 +274,10 @@ a {
 }
 
 .product-card {
-  border-radius: 50%;
+  width: 100% !important; /* Принудительно на всю ширину */
+  max-width: 100%;
+  margin: 0 !important; /* Убираем margin: 0 auto */
+  box-sizing: border-box;
 }
 
 /* =====================================
@@ -530,7 +541,7 @@ a {
 
 .cart-notification {
   position: absolute;
-  top: 80x; /* соответствует margin-top у .test_results */
+  top: 80px; /* соответствует margin-top у .test_results */
   left: 0;
   right: 0;
   background: linear-gradient(135deg, #4CAF50, #2E7D32);
@@ -562,4 +573,172 @@ a {
   opacity: 0;
 }
 
+/* ===================== MOBILE ===================== */
+@media (max-width: 768px) {
+
+  html, body {
+    background-color: hsla(33, 27%, 94%, 0.87) !important;
+    margin: 0;
+    padding: 0;
+  }
+
+  .container {
+    width: 100% !important;
+    max-width: 100% !important;
+    margin: 0 !important;
+    padding: 15px 10px;
+    border-radius: 0 !important;
+    box-sizing: border-box;
+
+    /* Центрирование внутренних блоков */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  /* Убираем боковые отступы у всех основных блоков */
+  .entry,
+  .information,
+  .module,
+  .task,
+  .card-item {
+    width: 100% !important;
+    max-width: 100% !important;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+  }
+
+  /* Карточки и задания с небольшим внутренним отступом */
+  .card-item,
+  .task {
+    padding: 20px 15px;
+  }
+
+  .product-card {
+    width: 100% !important;
+    max-width: 100% !important;
+    margin: 15px 0 !important;
+  }
+
+  /* Картинки */
+  .photo2, .photo3, .photo4, .logo {
+    max-width: 100%;
+    height: auto;
+  }
+
+  /* Заголовки и текст */
+  h1 {
+    font-size: 1.7rem;
+  }
+
+  p {
+    font-size: 17px;
+    text-align: left;
+  }
+
+  /* Кнопки ответов */
+ .options {
+    flex-direction: row;           /* оставляем горизонтально */
+    justify-content: center;       /* центрируем */
+    gap: 10px;
+    flex-wrap: nowrap;             /* ← важно! запрещаем перенос на новую строку */
+    width: 100%;
+    max-width: 100%;
+  }
+  .options .text-box {
+    height: auto;           /* убираем фиксированную высоту */
+    margin: 8px 0;          /* уменьшаем вертикальные отступы */
+  }
+
+  .text-box {
+    flex: 1;                       /* кнопки делят пространство поровну */
+    min-width: 0;                  /* разрешаем сжиматься */
+    margin: 6px 0;
+  }
+
+  .btn {
+    width: 100%;
+    padding: 16px;
+  }
+
+  .btn-white {
+    padding: 13px 16px;            /* уменьшили padding */
+    font-size: 1rem;               /* 16px — компактно */
+    min-height: 48px;
+    border-radius: 50px;
+    white-space: nowrap;           /* текст не переносится */
+    font-weight: 600;
+  }
+
+
+  .cart-notification {
+    max-width: 92%;
+    left: 4%;
+    right: 4%;
+  }
+  .card-item {
+    text-align: left;
+  }
+
+  .card-item h2 {
+    font-size: 1.45rem;
+    margin-bottom: 14px;
+  }
+
+  .card-item p {
+    font-size: 17px;
+    line-height: 1.65;
+  }
+  /* === ВЕРХНЯЯ КАРТОЧКА (card-item--primary) === */
+  .card-item--primary {
+    flex-direction: column;
+    align-items: flex-start;     /* выравниваем по левому краю как в нижней карточке */
+    text-align: left;            /* важно! */
+    padding: 20px 18px;
+  }
+
+  /* Скрываем картинку полностью на мобильных */
+  .card-item--primary img {
+    display: none !important;
+  }
+
+  /* Делаем текст таким же, как в нижней карточке */
+  .card-item--primary h2 {
+    font-size: 1.45rem;
+    text-align: left;
+    margin-bottom: 16px;
+  }
+
+  .card-item--primary p {
+    font-size: 17px;
+    line-height: 1.65;
+    text-align: left;
+    max-width: 100%;
+  }
+
+  /* Убираем ограничение ширины текста */
+  .card-item--primary > div:first-child {
+    width: 100%;
+    max-width: none;
+    margin: 0;
+  }
+
+  /* Нижняя карточка (для единообразия) */
+  .card-item--secondary {
+    text-align: left;
+    padding: 20px 18px;
+  }
+
+  .card-item--secondary h2,
+  .card-item--secondary p {
+    text-align: left;
+  }
+  .test_results {
+  margin-top: 50px;
+  margin-bottom: 20px;
+  color: rgba(0, 0, 0, 0.534);
+  font-size: 1rem;
+}
+
+}
 
