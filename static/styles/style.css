@@ -746,6 +746,9 @@ a {
   color: rgba(0, 0, 0, 0.534);
   font-size: 1rem;
 }
-
+  .text-start {
+    font-size: 100%;
+    text-align: center;
+}
 }
 
