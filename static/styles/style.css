@@ -273,12 +273,7 @@ a {
   font-size: 1.2rem;
 }
 
-.product-card {
-  width: 100% !important; /* Принудительно на всю ширину */
-  max-width: 100%;
-  margin: 0 !important; /* Убираем margin: 0 auto */
-  box-sizing: border-box;
-}
+
 
 /* =====================================
   6. КНОПКИ
@@ -614,11 +609,23 @@ a {
     padding: 20px 15px;
   }
 
+  @media (max-width: 768px) {
+
+  /* Только для мобильных — делаем карточку товара компактной и центрированной */
   .product-card {
-    width: 100% !important;
-    max-width: 100% !important;
-    margin: 15px 0 !important;
+    width: 100%;
+    max-width: 380px;           /* ← вот ключевой момент */
+    margin: 20px auto !important;
+    padding: 20px 15px;
   }
+
+  /* Изображение внутри карточки */
+  .product-card img {
+    max-width: 100%;
+    height: auto;
+    margin-bottom: 15px;
+  }
+}
 
   /* Картинки */
   .photo2, .photo3, .photo4, .logo {
