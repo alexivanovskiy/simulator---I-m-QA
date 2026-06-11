@@ -749,6 +749,8 @@ a {
   .text-start {
     font-size: 100%;
     text-align: center;
+    white-space: normal;          /* разрешаем перенос */
+    word-break: normal;
 }
 }
 
