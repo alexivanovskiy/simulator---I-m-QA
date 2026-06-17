@@ -8,7 +8,7 @@ document.addEventListener('DOMContentLoaded', function () {
         '2': 'error',    // Для задания 2 правильный ответ — «Есть ошибка»
         '3': 'error',    // Для задания 3 правильный ответ — «Есть ошибка»
         '4': 'no-error', // Для задания 4 правильный ответ — «Ошибки нет»
-        '5': 'error',    // Для задания 5 правильный ответ — «Есть нет»
+        '5': 'no-error',  // Для задания 5 правильный ответ — «Ошибки нет»
     };
 
     // Функция для показа обратной связи
@@ -101,7 +101,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 } else if (taskId === '4') {
                     showFeedback(taskElement, true, 'Вот теперь кнопка добавить в избранное ❤️ работает');
                 } else if (taskId === '5') {
-                    showFeedback(taskElement, true, 'Верно! При уменьшении экрана текст и изображения выглядят не ровно')
+                    showFeedback(taskElement, true, 'Верно! При уменьшении экрана текст и изображения выглядят также ровно')
                 }
             } else {
                 if (taskId === '1') {
@@ -113,7 +113,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 } else if (taskId === '4') {
                     showFeedback(taskElement, false, 'Ошибок нет, все кнопки работают корректно');
                 } else if (taskId === '5') {
-                    showFeedback(taskElement, false, 'При уменьшении экрана текст и изображения съезжают, так быть не должно');
+                    showFeedback(taskElement, false, 'Бывает так, что при уменьшении экрана текст и изображения съезжают, но у нас все ровно');
                 }
             }
 

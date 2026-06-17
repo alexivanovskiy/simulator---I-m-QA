@@ -666,12 +666,51 @@ a {
   .btn {
     width: 100%;
     padding: 16px;
+    
   }
 
-  .btn-white {
-    padding: 13px 16px;            /* уменьшили padding */
-    font-size: 1rem;               /* 16px — компактно */
+  @media (max-width: 768px) {
+
+  /* Кнопки "Купить" */
+  .btn-buy-primary,
+  .btn-buy-primary2 {
+    padding: 12px 26px;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  /* Кнопка с сердечком */
+  .btn-favorite-classic,
+  .btn-favorite-classic2 {
+    padding: 10px 14px;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    min-width: 48px;
     min-height: 48px;
+  }
+
+  /* Убираем красный эффект при нажатии для задания 3 */
+  .btn-favorite-classic:active {
+    background-color: transparent !important;
+    border-color: #888 !important;
+    color: #888 !important;
+    transform: scale(0.92) !important;   /* лёгкое нажатие */
+  }
+
+  /* Для задания 4 оставляем активное состояние */
+  .btn-favorite-classic2:active {
+    background-color: #F44336 !important;
+    border-color: #F44336 !important;
+    color: white !important;
+  }
+}
+
+  .btn-white {
+    padding: 13px 16px !important;            /* уменьшили padding */
+    font-size: 1rem;               /* 16px — компактно */
+    min-height: 46px;
     border-radius: 50px;
     white-space: nowrap;           /* текст не переносится */
     font-weight: 600;
