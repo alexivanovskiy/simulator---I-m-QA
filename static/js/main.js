@@ -9,6 +9,7 @@ document.addEventListener('DOMContentLoaded', function () {
         '3': 'error',    // Для задания 3 правильный ответ — «Есть ошибка»
         '4': 'no-error', // Для задания 4 правильный ответ — «Ошибки нет»
         '5': 'no-error',  // Для задания 5 правильный ответ — «Ошибки нет»
+        '6': 'error',    // Для задания 6 правильный ответ — «Есть ошибка»
     };
 
     // Функция для показа обратной связи
@@ -93,15 +94,17 @@ document.addEventListener('DOMContentLoaded', function () {
             // Проверяем ответ
             if (userAnswer === correctAnswer) {
                 if (taskId === '1') {
-                    showFeedback(taskElement, true, 'Всё верно. В этот раз ошибки нет! ✅');
+                    showFeedback(taskElement, true, 'Всё верно. В этот раз ошибки нет!✅');
                 } else if (taskId === '2') {
                     showFeedback(taskElement, true, 'Правильно! Кнопки расположены не на одном уровне! 🛠️');
                 } else if (taskId === '3') {
-                    showFeedback(taskElement, true, 'Верно! При нажатии на ❤️ товар не добавился в избранное');
+                    showFeedback(taskElement, true, 'Верно! кнопка добавить в избранное ❤️ не работает');
                 } else if (taskId === '4') {
                     showFeedback(taskElement, true, 'Вот теперь кнопка добавить в избранное ❤️ работает');
                 } else if (taskId === '5') {
-                    showFeedback(taskElement, true, 'Верно! При уменьшении экрана текст и изображения выглядят также ровно')
+                    showFeedback(taskElement, true, 'Верно! При уменьшении экрана текст и изображения выглядят также ровно');
+                } else if (taskId === '6') {
+                    showFeedback(taskElement, true, 'При ручном вводе, значение не дублируется и они могут быть меньше 0 и больше 10000');
                 }
             } else {
                 if (taskId === '1') {
@@ -114,6 +117,8 @@ document.addEventListener('DOMContentLoaded', function () {
                     showFeedback(taskElement, false, 'Ошибок нет, все кнопки работают корректно');
                 } else if (taskId === '5') {
                     showFeedback(taskElement, false, 'Бывает так, что при уменьшении экрана текст и изображения съезжают, но у нас все ровно');
+                } else if (taskId === '6') {
+                    showFeedback(taskElement, false, 'Проверь корректность работы ручного ввода');
                 }
             }
 
@@ -170,6 +175,33 @@ document.addEventListener('DOMContentLoaded', function () {
             }
         });
     });
+    const range = document.getElementById('price');
+    const numberInput = document.getElementById('price_to');
+    const valueSpan = document.getElementById('price_value');
+
+    function updateValue() {
+        const val = parseInt(range.value);
+        valueSpan.textContent = val;
+        numberInput.value = val;
+    }
+
+    function updateRange() {
+        let val = parseInt(numberInput.value);
+        
+        // Ограничение по min/max
+        if (val < 0) val = 0;
+        if (val > 10000) val = 10000;
+        
+        range.value = val;
+        // valueSpan.textContent = val;
+    }
+
+    // Слушатели
+    range.addEventListener('input', updateValue);
+    numberInput.addEventListener('input', updateRange);
+
+    // Инициализация
+    updateValue();
 });
 
 

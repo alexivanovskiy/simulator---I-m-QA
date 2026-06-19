@@ -16,7 +16,7 @@
             <img class="logo" src="static/images/2026-05-12_10-11-57.png" alt="картинка программиста">
             <p id="welcome-message">Попробуй себя в роли Тестировщика и узнай подходит ли тебе эта профессия💻</p>
         </div>
-        
+
         <div class="information">
             <div class="card-list">
                 <div class="card-item card-item--primary">
@@ -99,7 +99,7 @@
                             <span class="heart-icon">♡</span>
                         </button>
                     </div>
-                    
+
                 </div>
                 <div id="cart-notification" class="cart-notification hidden">
                     Товар успешно добавлен в корзину! ✅
@@ -133,7 +133,7 @@
                             <span class="heart-icon2">♡</span>
                         </button>
                     </div>
-                    
+
                 </div>
                 <div id="cart-notification2" class="cart-notification hidden">
                     Товар успешно добавлен в корзину! ✅
@@ -156,11 +156,46 @@
             <!-- Задание 5 -->
             <div class="task task-5 hidden" data-task-id="5">
                 <span>Задание 5</span>
-                <h2 class="text-start">А теперь уменьши экран на компьютере и посмотри, <br> все ли стоит ровно или текст наезжает друг на друга</h2>
+                <h2 class="text-start">А теперь уменьши экран на компьютере и посмотри, все ли стоит ровно или
+                    текст наезжает друг на друга</h2>
                 <span>Ниже подсказка как это сделать</span>
                 <div class="product-card">
                     <img class="" src="static/images/page_size.png" alt="размер страницы">
                 </div>
+                <h2 class="test_results">Результат тестирования</h2>
+                <div class="options">
+                    <div class="text-box">
+                        <a href="#" class="btn btn-white" data-answer="error">Есть ошибка</a>
+                    </div>
+                    <div class="text-box">
+                        <a href="#" class="btn btn-white" data-answer="no-error">Ошибки нет</a>
+                    </div>
+                </div>
+
+                <!-- Контейнер для обратной связи -->
+                <div class="feedback-container"></div>
+
+            </div>
+
+            <!-- Задание 6 -->
+            <div class="task task-6 hidden" data-task-id="6">
+                <span>Задание 6</span>
+                <h2 class="text-start">Проверь как работает фильтр</h2>
+                <span class="text_task-6">Можешь ввести число вручную или двигать бегунок, будь внимателен, значения должны дублироваться<br>минимальное значение 0, максимальное 10000</span>
+
+                <div class="filter-group">
+                    <label for="price">Цена:</label>
+
+                    <div class="range-container">
+                        <input type="range" id="price" min="0" max="10000" value="5000" step="100">
+                        <div class="range-value-box">
+                            <span id="price_value">5000</span>
+                        </div>
+                    </div>
+
+                    <input type="number" id="price_to" min="0" max="10000" value="5000">
+                </div>
+
                 <h2 class="test_results">Результат тестирования</h2>
                 <div class="options">
                     <div class="text-box">
