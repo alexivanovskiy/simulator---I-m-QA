@@ -130,7 +130,8 @@ a {
   border-radius: 16px;
   padding: 24px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-  flex: 1 1 400px;
+  flex: 1 1 340px;
+  
   max-width: 1000px;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
   position: relative;
@@ -146,9 +147,9 @@ a {
 }
 .card-item--primary {
   background: #f8f9fa;
-  border-left: 5px solid #3498db;
+  position: relative;
   padding: 2rem;
-  border-radius: 0 16px 16px 0;
+ 
 }
 
 .card-item--primary p {
@@ -171,7 +172,7 @@ a {
 .card-item--primary img {
   width: 300px; /* Оставляем только одно значение ширины */
   height: auto;
-  border-radius: 8px;
+  border-radius: 
   flex-shrink: 0; /* Запрещаем картинке сжиматься, чтобы она не "уезжала" вниз */
 }
 
@@ -182,6 +183,8 @@ a {
   
 }
 
+
+
 .card-item::before {
   content: '';
   position: absolute;
@@ -190,6 +193,18 @@ a {
   width: 4px;
   height: 100%;
   background: linear-gradient(to bottom, #4CAF50, #2196F3);
+}
+
+/* Используем тот же градиент, что и у всех карточек */
+.card-item--primary::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 4px;                    /* можно сделать чуть толще */
+    height: 100%;
+    background: linear-gradient(to bottom, #4CAF50, #2196F3);
+    
 }
 
 .card-item:hover {
