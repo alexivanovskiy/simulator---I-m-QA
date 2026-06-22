@@ -306,6 +306,7 @@ a {
 
 .text_task-6 {
   font-size: 1.35rem;
+  text-align: left;
 }
 
 /* ===================== ФИЛЬТР ЦЕНЫ ===================== */
@@ -329,33 +330,36 @@ a {
 
 .range-container {
     position: relative;
-    margin-bottom: 15px;
+    margin-bottom: 20px;
+    padding-top: 35px;   /* место для движущегося пузырька */
 }
 
 #price {
     width: 100%;
-    accent-color: #3498db;           /* цвет бегунка и трека */
+    accent-color: #3498db;
     cursor: pointer;
 }
 
-/* Белое окошко со значением */
+/* Пузырек со значением */
 .range-value-box {
     position: absolute;
-    top: -45px;
+    top: -8px;
     left: 50%;
     transform: translateX(-50%);
     background: white;
-    padding: 6px 16px;
+    padding: 6px 18px;
     border-radius: 8px;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
     font-weight: 700;
-    font-size: 1.1rem;
+    font-size: 1.15rem;
     color: #2c3e50;
     white-space: nowrap;
     pointer-events: none;
+    transition: left 0.1s ease-out;
+    z-index: 10;
 }
 
-/* Маленький треугольник под окошком */
+/* Треугольник под пузырьком */
 .range-value-box::after {
     content: '';
     position: absolute;
@@ -367,7 +371,7 @@ a {
     border-top: 8px solid white;
 }
 
-/* Поле для ввода числа */
+/* Поле для ручного ввода */
 #price_to {
     width: 120px;
     padding: 10px 12px;

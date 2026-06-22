@@ -50,31 +50,31 @@ document.addEventListener('DOMContentLoaded', function () {
             setTimeout(() => {
                 feedback.className = 'feedback hidden';
 
-            // ПОКАЗ СЛЕДУЮЩЕГО ЗАДАНИЯ ТОЛЬКО ПРИ ПРАВИЛЬНОМ ОТВЕТЕ
-            if (isCorrect) {
-                const currentTaskId = parseInt(taskElement.dataset.taskId);
-                const nextTaskId = currentTaskId + 1;
-                const nextTask = document.querySelector(`.task[data-task-id="${nextTaskId}"]`);
+                // ПОКАЗ СЛЕДУЮЩЕГО ЗАДАНИЯ ТОЛЬКО ПРИ ПРАВИЛЬНОМ ОТВЕТЕ
+                if (isCorrect) {
+                    const currentTaskId = parseInt(taskElement.dataset.taskId);
+                    const nextTaskId = currentTaskId + 1;
+                    const nextTask = document.querySelector(`.task[data-task-id="${nextTaskId}"]`);
 
-                if (nextTask) {
-                    nextTask.classList.remove('hidden');
-                    nextTask.scrollIntoView({
-                        behavior: 'smooth',
-                        block: 'start'
-                    });
-                } else {
-                    // ЕСЛИ ЭТО БЫЛО ПОСЛЕДНЕЕ ЗАДАНИЕ — ПОКАЗЫВАЕМ ФИНАЛЬНОЕ СООБЩЕНИЕ
-                    const finalMessage = document.createElement('div');
-                    finalMessage.className = 'feedback correct';
-                    finalMessage.textContent = 'Поздравляем! Вы прошли все задания тренажёра! 🎉';
-                    feedbackContainer.appendChild(finalMessage);
-                    setTimeout(() => {
-                        finalMessage.classList.add('visible');
-                    }, 10);
+                    if (nextTask) {
+                        nextTask.classList.remove('hidden');
+                        nextTask.scrollIntoView({
+                            behavior: 'smooth',
+                            block: 'start'
+                        });
+                    } else {
+                        // ЕСЛИ ЭТО БЫЛО ПОСЛЕДНЕЕ ЗАДАНИЕ — ПОКАЗЫВАЕМ ФИНАЛЬНОЕ СООБЩЕНИЕ
+                        const finalMessage = document.createElement('div');
+                        finalMessage.className = 'feedback correct';
+                        finalMessage.textContent = 'Поздравляем! Вы прошли все задания тренажёра! 🎉';
+                        feedbackContainer.appendChild(finalMessage);
+                        setTimeout(() => {
+                            finalMessage.classList.add('visible');
+                        }, 10);
+                    }
                 }
-            }
 
-               
+
             }, 500);
         }, 1000);
     }
@@ -177,31 +177,39 @@ document.addEventListener('DOMContentLoaded', function () {
     });
     const range = document.getElementById('price');
     const numberInput = document.getElementById('price_to');
+    const valueBox = document.querySelector('.range-value-box');
     const valueSpan = document.getElementById('price_value');
 
-    function updateValue() {
-        const val = parseInt(range.value);
+    function updateSlider() {
+        const val = parseInt(range.value) || 0;
+
+        // Обновляем пузырек и поле ввода
         valueSpan.textContent = val;
         numberInput.value = val;
+
+        // Двигаем пузырек
+        const min = parseInt(range.min);
+        const max = parseInt(range.max);
+        let percent = ((val - min) / (max - min)) * 100;
+
+        if (percent < 8) percent = 8;
+        if (percent > 92) percent = 92;
+
+        valueBox.style.left = `${percent}%`;
     }
 
-    function updateRange() {
-        let val = parseInt(numberInput.value);
-        
-        // Ограничение по min/max
-        if (val < 0) val = 0;
-        if (val > 10000) val = 10000;
-        
-        range.value = val;
-        // valueSpan.textContent = val;
-    }
+    // ==================== СЛУШАТЕЛИ ====================
 
-    // Слушатели
-    range.addEventListener('input', updateValue);
-    numberInput.addEventListener('input', updateRange);
+    // Только бегунок управляет всем
+    range.addEventListener('input', updateSlider);
+
+    // Поле ввода НЕ управляет ничем (только отображает)
+    numberInput.addEventListener('input', function () {
+        // Ничего не делаем — игнорируем ввод
+    });
 
     // Инициализация
-    updateValue();
+    updateSlider();
 });
 
 
