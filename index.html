@@ -181,7 +181,8 @@
             <div class="task task-6 hidden" data-task-id="6">
                 <span>Задание 6</span>
                 <h2 class="text-start">Проверь как работает фильтр</h2>
-                <span class="text_task-6">-Можешь ввести число вручную<br>-Можешь двигать бегунок<br>-Будь внимателен, значения должны дублироваться<br>-Минимальное значение 0, Максимальное 10000</span>
+                <span class="text_task-6">-Можешь ввести число вручную<br>-Можешь двигать бегунок<br>-Будь внимателен,
+                    значения должны дублироваться<br>-Минимальное значение 0, Максимальное 10000</span>
 
                 <div class="filter-group">
                     <label for="price">Цена:</label>
@@ -211,12 +212,43 @@
 
             </div>
 
-        </div>
-    </div>
-    <footer>
+            <!-- Задание 7 -->
+            <div class="task task-7 hidden" data-task-id="7">
+                <span>Задание 7</span>
+                <h2>Протестируй работу поля поиска</h2>
 
-    </footer>
-    <script src="static/js/main.js"></script>
+                <div class="search-test">
+                    <div class="search-box">
+                        <div class="search-input-wrapper">
+                            <input type="text" id="search-input" placeholder="Введите запрос для поиска...">
+                            <span id="clear-btn" class="clear-btn">✕</span>
+                        </div>
+                        <button id="search-btn" class="btn btn-search">
+                            Найти
+                        </button>
+                    </div>
+                    <div id="search-result" class="search-result hidden">
+                        <!-- Результаты поиска -->
+                    </div>
+                </div>
+                <h2 class="test_results">Результат тестирования</h2>
+                <div class="options">
+                    <div class="text-box">
+                        <a href="#" class="btn btn-white" data-answer="error">Есть ошибка</a>
+                    </div>
+                    <div class="text-box">
+                        <a href="#" class="btn btn-white" data-answer="no-error">Ошибки нет</a>
+                    </div>
+                </div>
+                
+                <!-- Контейнер для обратной связи -->
+                <div class="feedback-container"></div>
+            </div>
+        </div>
+        <footer>
+
+        </footer>
+        <script src="static/js/main.js"></script>
 </body>
 
 </html>

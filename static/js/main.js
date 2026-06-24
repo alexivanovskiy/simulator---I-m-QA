@@ -10,6 +10,7 @@ document.addEventListener('DOMContentLoaded', function () {
         '4': 'no-error', // Для задания 4 правильный ответ — «Ошибки нет»
         '5': 'no-error',  // Для задания 5 правильный ответ — «Ошибки нет»
         '6': 'error',    // Для задания 6 правильный ответ — «Есть ошибка»
+        '7': 'error',    // Для задания 7 правильный ответ - «Есть ошибка»
     };
 
     // Функция для показа обратной связи
@@ -104,7 +105,9 @@ document.addEventListener('DOMContentLoaded', function () {
                 } else if (taskId === '5') {
                     showFeedback(taskElement, true, 'Верно! При уменьшении экрана текст и изображения выглядят также ровно');
                 } else if (taskId === '6') {
-                    showFeedback(taskElement, true, 'При ручном вводе, значение не дублируется и они могут быть меньше 0 и больше 10000');
+                    showFeedback(taskElement, true, 'Верно, при ручном вводе, значение не дублируется и они могут быть меньше 0 и больше 10000');
+                } else if (taskId === '7') {
+                    showFeedback(taskElement, true, 'Верно, кнопка ❌ не стирает текст');
                 }
             } else {
                 if (taskId === '1') {
@@ -119,6 +122,8 @@ document.addEventListener('DOMContentLoaded', function () {
                     showFeedback(taskElement, false, 'Бывает так, что при уменьшении экрана текст и изображения съезжают, но у нас все ровно');
                 } else if (taskId === '6') {
                     showFeedback(taskElement, false, 'Проверь корректность работы ручного ввода');
+                } else if (taskId === '7') {
+                    showFeedback(taskElement, false, 'Неверно, проверь все кнопки и проверь ввод текста');
                 }
             }
 
@@ -210,6 +215,54 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // Инициализация
     updateSlider();
+
+    // ===================== ЗАДАНИЕ 7 =====================
+    const searchInput = document.getElementById('search-input');
+    const searchBtn = document.getElementById('search-btn');
+    const clearBtn = document.getElementById('clear-btn');
+    const searchResult = document.getElementById('search-result');
+
+    function performSearch() {
+        const query = searchInput.value.trim();
+
+        if (query === '') {
+            searchResult.innerHTML = `<span style="color:#e74c3c;">Введите поисковый запрос</span>`;
+        } else {
+            searchResult.innerHTML = `✅ Найдено по запросу: <strong>${query}</strong>`;
+        }
+        searchResult.classList.remove('hidden');
+    }
+
+    // Показываем/скрываем кнопку крестика
+    searchInput.addEventListener('input', function () {
+        if (this.value.length > 0) {
+            clearBtn.style.display = 'block';
+        } else {
+            clearBtn.style.display = 'none';
+        }
+    });
+                    //БАГ//
+    // // Очистка поля по клику на крестик
+    // clearBtn.addEventListener('click', function () {
+    //     searchInput.value = '';
+    //     clearBtn.style.display = 'none';
+    //     searchInput.focus();               // возвращаем фокус в поле
+    // });
+
+    // Кнопка "Найти"
+    searchBtn.addEventListener('click', performSearch);
+
+    // Enter в поле поиска
+    searchInput.addEventListener('keypress', function (e) {
+        if (e.key === 'Enter') {
+            performSearch();
+        }
+    });
+
+    // Инициализация (на случай, если поле уже заполнено)
+    if (searchInput.value.length > 0) {
+        clearBtn.style.display = 'block';
+    }
 });
 
 
