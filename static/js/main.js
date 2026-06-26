@@ -78,7 +78,7 @@ document.addEventListener('DOMContentLoaded', function () {
                     }
                 }
             }, 500);
-        }, 500);
+        }, 4500);
     }
 
     // ===================== ОБРАБОТЧИК КНОПОК =====================
