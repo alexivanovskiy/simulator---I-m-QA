@@ -156,11 +156,21 @@
             <!-- Задание 5 -->
             <div class="task task-5 hidden" data-task-id="5">
                 <span>Задание 5</span>
-                <h2 class="text-start">А теперь уменьши экран на компьютере и посмотри, все ли стоит ровно или
-                    текст наезжает друг на друга</h2>
-                <span>Ниже подсказка как это сделать</span>
-                <div class="product-card">
-                    <img class="" src="static/images/page_size.png" alt="размер страницы">
+                <h2 class="text-start">Проверь как работает окно бронирования отелей</h2>
+
+                <div class="booking-form">
+                    <div class="form-group">
+                        <label>Укажите город</label>
+                        <input type="text" id="city-input" placeholder="Например: Анталия">
+                    </div>
+                    <div class="form-group">
+                        <label>Укажите дату</label>
+                        <input type="date" id="date-input">
+                    </div>
+
+                    <button id="booking-btn" class="btn btn-search">
+                        Найти тур
+                    </button>
                 </div>
                 <h2 class="test_results">Результат тестирования</h2>
                 <div class="options">
@@ -240,7 +250,7 @@
                         <a href="#" class="btn btn-white" data-answer="no-error">Ошибки нет</a>
                     </div>
                 </div>
-                
+
                 <!-- Контейнер для обратной связи -->
                 <div class="feedback-container"></div>
             </div>

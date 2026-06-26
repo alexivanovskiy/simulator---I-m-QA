@@ -8,7 +8,7 @@ document.addEventListener('DOMContentLoaded', function () {
         '2': 'error',    // Для задания 2 правильный ответ — «Есть ошибка»
         '3': 'error',    // Для задания 3 правильный ответ — «Есть ошибка»
         '4': 'no-error', // Для задания 4 правильный ответ — «Ошибки нет»
-        '5': 'no-error',  // Для задания 5 правильный ответ — «Ошибки нет»
+        '5': 'error',  // Для задания 5 правильный ответ — «Есть ошибка»
         '6': 'error',    // Для задания 6 правильный ответ — «Есть ошибка»
         '7': 'error',    // Для задания 7 правильный ответ - «Есть ошибка»
     };
@@ -77,7 +77,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
 
             }, 500);
-        }, 1000);
+        }, 400);
     }
 
     // Обработчик для всех кнопок
@@ -103,11 +103,11 @@ document.addEventListener('DOMContentLoaded', function () {
                 } else if (taskId === '4') {
                     showFeedback(taskElement, true, 'Вот теперь кнопка добавить в избранное ❤️ работает');
                 } else if (taskId === '5') {
-                    showFeedback(taskElement, true, 'Верно! При уменьшении экрана текст и изображения выглядят также ровно');
+                    showFeedback(taskElement, true, 'Верно! Кнопка "Найти тур" не работает');
                 } else if (taskId === '6') {
                     showFeedback(taskElement, true, 'Верно, при ручном вводе, значение не дублируется и они могут быть меньше 0 и больше 10000');
                 } else if (taskId === '7') {
-                    showFeedback(taskElement, true, 'Верно, кнопка ❌ не стирает текст');
+                    showFeedback(taskElement, true, 'Верно, кнопка ❌ не стирает текст, а если открыть сайт на смартфоне то текст не виден');
                 }
             } else {
                 if (taskId === '1') {
@@ -119,7 +119,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 } else if (taskId === '4') {
                     showFeedback(taskElement, false, 'Ошибок нет, все кнопки работают корректно');
                 } else if (taskId === '5') {
-                    showFeedback(taskElement, false, 'Бывает так, что при уменьшении экрана текст и изображения съезжают, но у нас все ровно');
+                    showFeedback(taskElement, false, 'Если бы все работало, то перед тобой был бы список туров');
                 } else if (taskId === '6') {
                     showFeedback(taskElement, false, 'Проверь корректность работы ручного ввода');
                 } else if (taskId === '7') {
@@ -241,7 +241,7 @@ document.addEventListener('DOMContentLoaded', function () {
             clearBtn.style.display = 'none';
         }
     });
-                    //БАГ//
+    //БАГ//
     // // Очистка поля по клику на крестик
     // clearBtn.addEventListener('click', function () {
     //     searchInput.value = '';
