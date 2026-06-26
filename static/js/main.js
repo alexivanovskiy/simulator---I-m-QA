@@ -1,57 +1,46 @@
 document.addEventListener('DOMContentLoaded', function () {
-    // Находим все кнопки в модуле
     const buttons = document.querySelectorAll('.module .btn-white');
 
-    // Правильные ответы для заданий
     const correctAnswers = {
-        '1': 'no-error', // Для задания 1 правильный ответ — «Ошибки нет»
-        '2': 'error',    // Для задания 2 правильный ответ — «Есть ошибка»
-        '3': 'error',    // Для задания 3 правильный ответ — «Есть ошибка»
-        '4': 'no-error', // Для задания 4 правильный ответ — «Ошибки нет»
-        '5': 'error',  // Для задания 5 правильный ответ — «Есть ошибка»
-        '6': 'error',    // Для задания 6 правильный ответ — «Есть ошибка»
-        '7': 'error',    // Для задания 7 правильный ответ - «Есть ошибка»
+        '1': 'no-error',
+        '2': 'error',
+        '3': 'error',
+        '4': 'no-error',
+        '5': 'error',
+        '6': 'error',
+        '7': 'error'
     };
 
-    // Функция для показа обратной связи
+    // ===================== ОСНОВНАЯ ФУНКЦИЯ =====================
     function showFeedback(taskElement, isCorrect, message) {
-        // Находим контейнер для обратной связи в текущем задании
         const feedbackContainer = taskElement.querySelector('.feedback-container');
-        let feedback = feedbackContainer.querySelector('.feedback');
+        let feedback = feedbackContainer.querySelector('.feedback:not(.final-congratulation)');
 
-        // Если элемент обратной связи ещё не создан, создаём его
         if (!feedback) {
             feedback = document.createElement('div');
-            feedback.className = 'feedback hidden';
+            feedback.className = 'feedback';
             feedbackContainer.appendChild(feedback);
         }
 
-        // Сбрасываем предыдущие классы
-        feedback.className = 'feedback hidden';
+        feedback.className = 'feedback';
         feedback.textContent = message;
 
-        // Определяем класс в зависимости от правильности ответа
         const feedbackClass = isCorrect ? 'correct' : 'incorrect';
-        feedback.className = `feedback ${feedbackClass}`;
+        feedback.classList.add(feedbackClass);
 
-        // Показываем с анимацией
         setTimeout(() => {
             feedback.classList.add('visible');
         }, 10);
 
-        // Прокручиваем к блоку с обратной связью
-        feedback.scrollIntoView({
-            behavior: 'smooth',
-            block: 'center'
-        });
+        feedback.scrollIntoView({ behavior: 'smooth', block: 'center' });
 
-        // Автоматически скрываем через 4 секунды
+        // Скрываем сообщение через 4.5 секунды
         setTimeout(() => {
             feedback.classList.remove('visible');
+
             setTimeout(() => {
                 feedback.className = 'feedback hidden';
 
-                // ПОКАЗ СЛЕДУЮЩЕГО ЗАДАНИЯ ТОЛЬКО ПРИ ПРАВИЛЬНОМ ОТВЕТЕ
                 if (isCorrect) {
                     const currentTaskId = parseInt(taskElement.dataset.taskId);
                     const nextTaskId = currentTaskId + 1;
@@ -59,164 +48,119 @@ document.addEventListener('DOMContentLoaded', function () {
 
                     if (nextTask) {
                         nextTask.classList.remove('hidden');
-                        nextTask.scrollIntoView({
-                            behavior: 'smooth',
-                            block: 'start'
-                        });
+                        nextTask.scrollIntoView({ behavior: 'smooth', block: 'start' });
                     } else {
-                        // ЕСЛИ ЭТО БЫЛО ПОСЛЕДНЕЕ ЗАДАНИЕ — ПОКАЗЫВАЕМ ФИНАЛЬНОЕ СООБЩЕНИЕ
+                        // === ФИНАЛ ТРЕНАЖЁРА ===
                         const finalMessage = document.createElement('div');
-                        finalMessage.className = 'feedback correct';
+                        finalMessage.className = 'feedback correct final-congratulation';
                         finalMessage.textContent = 'Поздравляем! Вы прошли все задания тренажёра! 🎉';
                         feedbackContainer.appendChild(finalMessage);
+
                         setTimeout(() => {
                             finalMessage.classList.add('visible');
-                        }, 10);
+                        }, 300);
+
+                        // Показываем футер + скроллим к нему
+                        const footer = document.querySelector('footer');
+                        if (footer) {
+                            setTimeout(() => {
+                                footer.classList.add('show');
+                                
+                                // Плавный скролл до футера
+                                setTimeout(() => {
+                                    footer.scrollIntoView({
+                                        behavior: 'smooth',
+                                        block: 'start'   // можно изменить на 'center', если хочешь
+                                    });
+                                }, 900);
+                            }, 1200);
+                        }
                     }
                 }
-
-
             }, 500);
-        }, 400);
+        }, 500);
     }
 
-    // Обработчик для всех кнопок
+    // ===================== ОБРАБОТЧИК КНОПОК =====================
     buttons.forEach(button => {
         button.addEventListener('click', function (e) {
-            e.preventDefault(); // Предотвращаем переход по ссылке
+            e.preventDefault();
 
-            // Получаем элемент задания и его ID
             const taskElement = this.closest('.task');
             const taskId = taskElement.dataset.taskId;
             const userAnswer = this.dataset.answer;
             const correctAnswer = correctAnswers[taskId];
 
-            // Проверяем ответ
-            // Проверяем ответ
             if (userAnswer === correctAnswer) {
-                if (taskId === '1') {
-                    showFeedback(taskElement, true, 'Всё верно. В этот раз ошибки нет!✅');
-                } else if (taskId === '2') {
-                    showFeedback(taskElement, true, 'Правильно! Кнопки расположены не на одном уровне! 🛠️');
-                } else if (taskId === '3') {
-                    showFeedback(taskElement, true, 'Верно! кнопка добавить в избранное ❤️ не работает');
-                } else if (taskId === '4') {
-                    showFeedback(taskElement, true, 'Вот теперь кнопка добавить в избранное ❤️ работает');
-                } else if (taskId === '5') {
-                    showFeedback(taskElement, true, 'Верно! Кнопка "Найти тур" не работает');
-                } else if (taskId === '6') {
-                    showFeedback(taskElement, true, 'Верно, при ручном вводе, значение не дублируется и они могут быть меньше 0 и больше 10000');
-                } else if (taskId === '7') {
-                    showFeedback(taskElement, true, 'Верно, кнопка ❌ не стирает текст, а если открыть сайт на смартфоне то текст не виден');
-                }
+                if (taskId === '1') showFeedback(taskElement, true, 'Всё верно. В этот раз ошибки нет!✅');
+                else if (taskId === '2') showFeedback(taskElement, true, 'Правильно! Кнопки расположены не на одном уровне! 🛠️');
+                else if (taskId === '3') showFeedback(taskElement, true, 'Верно! кнопка добавить в избранное ❤️ не работает');
+                else if (taskId === '4') showFeedback(taskElement, true, 'Вот теперь кнопка добавить в избранное ❤️ работает');
+                else if (taskId === '5') showFeedback(taskElement, true, 'Верно! Кнопка "Найти тур" не работает');
+                else if (taskId === '6') showFeedback(taskElement, true, 'Верно, при ручном вводе значение не дублируется');
+                else if (taskId === '7') showFeedback(taskElement, true, 'Верно, кнопка ❌ не стирает текст, а на смартфоне текст не видно');
             } else {
-                if (taskId === '1') {
-                    showFeedback(taskElement, false, 'Здесь нет ошибки! Визуально всё выглядит красиво 🔎');
-                } else if (taskId === '2') {
-                    showFeedback(taskElement, false, 'На самом деле здесь есть ошибка! Присмотрись внимательнее 👀');
-                } else if (taskId === '3') {
-                    showFeedback(taskElement, false, 'Присмотрись: не все кнопки работают так как должны 👀');
-                } else if (taskId === '4') {
-                    showFeedback(taskElement, false, 'Ошибок нет, все кнопки работают корректно');
-                } else if (taskId === '5') {
-                    showFeedback(taskElement, false, 'Если бы все работало, то перед тобой был бы список туров');
-                } else if (taskId === '6') {
-                    showFeedback(taskElement, false, 'Проверь корректность работы ручного ввода');
-                } else if (taskId === '7') {
-                    showFeedback(taskElement, false, 'Неверно, проверь все кнопки и проверь ввод текста');
-                }
-            }
-
-        });
-    });
-
-    // --- ОБРАБОТЧИК КНОПКИ «КУПИТЬ» в 3 задании---
-    const buyButtons = document.querySelectorAll('.btn-buy-primary');
-    const notification = document.getElementById('cart-notification');
-
-    buyButtons.forEach(button => {
-        button.addEventListener('click', function () {
-            // Показываем уведомление
-            notification.classList.remove('hidden');
-            setTimeout(() => notification.classList.add('visible'), 10);
-
-            // Скрываем через 3 секунды
-            setTimeout(() => {
-                notification.classList.remove('visible');
-                setTimeout(() => notification.classList.add('hidden'), 400);
-            }, 4000);
-        });
-    });
-
-    // --- ОБРАБОТЧИК КНОПКИ «КУПИТЬ» в 4 задании---
-    const buyButtonsTask4 = document.querySelectorAll('.btn-buy-primary2');
-    const notificationTask4 = document.getElementById('cart-notification2');
-
-    buyButtonsTask4.forEach(button => {
-        button.addEventListener('click', function () {
-            // Показываем уведомление
-            notificationTask4.classList.remove('hidden');
-            setTimeout(() => notificationTask4.classList.add('visible'), 10);
-
-            // Скрываем через 3 секунды
-            setTimeout(() => {
-                notificationTask4.classList.remove('visible');
-                setTimeout(() => notificationTask4.classList.add('hidden'), 400);
-            }, 4000);
-        });
-    })
-
-    // Обработчик для кнопки «избранное» в 4 задании
-    const favoriteButtonsTask4 = document.querySelectorAll('.btn-favorite-classic2');
-    favoriteButtonsTask4.forEach(button => {
-        button.addEventListener('click', function () {
-            // Проверяем, есть ли у кнопки класс 'active'
-            if (this.classList.contains('active')) {
-                // Если есть — убираем его (сбрасываем стили)
-                this.classList.remove('active');
-            } else {
-                // Если нет — добавляем
-                this.classList.add('active');
+                if (taskId === '1') showFeedback(taskElement, false, 'Здесь нет ошибки! Визуально всё выглядит красиво 🔎');
+                else if (taskId === '2') showFeedback(taskElement, false, 'На самом деле здесь есть ошибка! Присмотрись внимательнее 👀');
+                else if (taskId === '3') showFeedback(taskElement, false, 'Присмотрись: не все кнопки работают так как должны 👀');
+                else if (taskId === '4') showFeedback(taskElement, false, 'Ошибок нет, все кнопки работают корректно');
+                else if (taskId === '5') showFeedback(taskElement, false, 'Если бы всё работало, то перед тобой был бы список туров');
+                else if (taskId === '6') showFeedback(taskElement, false, 'Проверь корректность работы ручного ввода');
+                else if (taskId === '7') showFeedback(taskElement, false, 'Неверно, проверь все кнопки и поведение на смартфоне');
             }
         });
     });
+
+    // ===================== ДОПОЛНИТЕЛЬНЫЕ ФУНКЦИИ =====================
+
+    // Кнопка "Купить" (задание 3)
+    document.querySelectorAll('.btn-buy-primary').forEach(btn => {
+        btn.addEventListener('click', () => {
+            const notif = document.getElementById('cart-notification');
+            notif.classList.remove('hidden');
+            setTimeout(() => notif.classList.add('visible'), 10);
+            setTimeout(() => notif.classList.remove('visible'), 3800);
+        });
+    });
+
+    // Кнопка "Купить" (задание 4)
+    document.querySelectorAll('.btn-buy-primary2').forEach(btn => {
+        btn.addEventListener('click', () => {
+            const notif = document.getElementById('cart-notification2');
+            notif.classList.remove('hidden');
+            setTimeout(() => notif.classList.add('visible'), 10);
+            setTimeout(() => notif.classList.remove('visible'), 3800);
+        });
+    });
+
+    // Кнопка сердечко (задание 4)
+    document.querySelectorAll('.btn-favorite-classic2').forEach(btn => {
+        btn.addEventListener('click', function () {
+            this.classList.toggle('active');
+        });
+    });
+
+    // Фильтр цены (задание 6)
     const range = document.getElementById('price');
+    const valueSpan = document.getElementById('price_value');
     const numberInput = document.getElementById('price_to');
     const valueBox = document.querySelector('.range-value-box');
-    const valueSpan = document.getElementById('price_value');
 
     function updateSlider() {
         const val = parseInt(range.value) || 0;
-
-        // Обновляем пузырек и поле ввода
         valueSpan.textContent = val;
         numberInput.value = val;
 
-        // Двигаем пузырек
-        const min = parseInt(range.min);
-        const max = parseInt(range.max);
-        let percent = ((val - min) / (max - min)) * 100;
-
+        let percent = ((val - 0) / 10000) * 100;
         if (percent < 8) percent = 8;
         if (percent > 92) percent = 92;
-
-        valueBox.style.left = `${percent}%`;
+        valueBox.style.left = percent + '%';
     }
 
-    // ==================== СЛУШАТЕЛИ ====================
-
-    // Только бегунок управляет всем
     range.addEventListener('input', updateSlider);
-
-    // Поле ввода НЕ управляет ничем (только отображает)
-    numberInput.addEventListener('input', function () {
-        // Ничего не делаем — игнорируем ввод
-    });
-
-    // Инициализация
     updateSlider();
 
-    // ===================== ЗАДАНИЕ 7 =====================
+    // Поле поиска (задание 7)
     const searchInput = document.getElementById('search-input');
     const searchBtn = document.getElementById('search-btn');
     const clearBtn = document.getElementById('clear-btn');
@@ -224,46 +168,19 @@ document.addEventListener('DOMContentLoaded', function () {
 
     function performSearch() {
         const query = searchInput.value.trim();
-
-        if (query === '') {
-            searchResult.innerHTML = `<span style="color:#e74c3c;">Введите поисковый запрос</span>`;
-        } else {
-            searchResult.innerHTML = `✅ Найдено по запросу: <strong>${query}</strong>`;
-        }
+        searchResult.innerHTML = query === '' 
+            ? `<span style="color:#e74c3c;">Введите поисковый запрос</span>` 
+            : `✅ Найдено по запросу: <strong>${query}</strong>`;
         searchResult.classList.remove('hidden');
     }
 
-    // Показываем/скрываем кнопку крестика
-    searchInput.addEventListener('input', function () {
-        if (this.value.length > 0) {
-            clearBtn.style.display = 'block';
-        } else {
-            clearBtn.style.display = 'none';
-        }
+    searchInput.addEventListener('input', () => {
+        clearBtn.style.display = searchInput.value.length > 0 ? 'block' : 'none';
     });
-    //БАГ//
-    // // Очистка поля по клику на крестик
-    // clearBtn.addEventListener('click', function () {
-    //     searchInput.value = '';
-    //     clearBtn.style.display = 'none';
-    //     searchInput.focus();               // возвращаем фокус в поле
-    // });
 
-    // Кнопка "Найти"
     searchBtn.addEventListener('click', performSearch);
-
-    // Enter в поле поиска
-    searchInput.addEventListener('keypress', function (e) {
-        if (e.key === 'Enter') {
-            performSearch();
-        }
+    searchInput.addEventListener('keypress', e => {
+        if (e.key === 'Enter') performSearch();
     });
 
-    // Инициализация (на случай, если поле уже заполнено)
-    if (searchInput.value.length > 0) {
-        clearBtn.style.display = 'block';
-    }
 });
-
-
-

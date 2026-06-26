@@ -494,11 +494,16 @@ a {
   background: transparent;
   border: 2px solid #888;
   color: #888;
-  width: 42px;  /* фиксированная ширина */
-  height: 42px;  /* фиксированная высота — одинаковая! */
+  width: 42px;
+  /* фиксированная ширина */
+  height: 42px;
+  /* фиксированная высота — одинаковая! */
   padding: 0;
   transition: all 0.2s ease;
 }
+
+
+
 
 .btn-favorite-classic .heart-icon {
   font-size: 1.5rem;
@@ -860,6 +865,32 @@ a {
   font-size: 1.05rem;
 }
 
+/* Скрываем футер во время прохождения заданий */
+footer {
+  display: none;
+  /* полностью убираем из потока */
+  transition: all 0.6s ease;
+  margin-top: 60px;
+}
+
+/* Показываем футер в конце */
+footer.show {
+  display: block;
+  animation: fadeInFooter 0.8s ease forwards;
+}
+
+@keyframes fadeInFooter {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
 /* ===================== MOBILE ===================== */
 @media (max-width: 768px) {
 
@@ -1129,5 +1160,15 @@ a {
   .feedback {
     font-size: 18px;
   }
+
+  /* Сокращаем отступ сверху у футера */
+    footer {
+        margin-top: 10px !important;     /* основной отступ */
+    }
+
+    .footer-content {
+        margin-top: 10px !important;     /* маленький отступ внутри футера */
+        padding-top: 20px;
+    }
 
 }
