@@ -13,6 +13,11 @@ jobs:
       - name: Скачать код
         uses: actions/checkout@v4
 
+      - name: Установить Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
       - name: Проверка index.html
         run: |
           if [ -f index.html ]; then
@@ -22,9 +27,8 @@ jobs:
             exit 1
           fi
 
-      - name: Заглушка линтера
-        run: echo "Линтер HTML/CSS (учебная заглушка) — OK"
+      - name: Линтер HTML (HTMLHint)
+        run: npx --yes htmlhint index.html
 
       - name: Заглушка сборки
         run: echo "Сборка (учебная заглушка) — OK"
-        
