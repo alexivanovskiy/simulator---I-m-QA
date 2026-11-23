@@ -1,0 +1,30 @@
+name: CI
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Скачать код
+        uses: actions/checkout@v4
+
+      - name: Проверка index.html
+        run: |
+          if [ -f index.html ]; then
+            echo "index.html найден — OK"
+          else
+            echo "index.html не найден"
+            exit 1
+          fi
+
+      - name: Заглушка линтера
+        run: echo "Линтер HTML/CSS (учебная заглушка) — OK"
+
+      - name: Заглушка сборки
+        run: echo "Сборка (учебная заглушка) — OK"
+        
