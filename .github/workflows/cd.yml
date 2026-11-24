@@ -1,22 +1,36 @@
 name: CD
 
 on:
-  push:
-    branches: [ main ]
-  workflow_dispatch:  # можно запустить вручную из Actions
+  workflow_run:
+    workflows: ["CI"]      # имя должно совпадать с name: в ci.yml
+    types:
+      - completed
+    branches: [main]
+  workflow_dispatch:       # ручной запуск из Actions (по желанию)
 
 jobs:
   deploy:
+    # деплой только если CI успешен (или запуск вручную)
+    if: >
+      github.event_name == 'workflow_dispatch' ||
+      github.event.workflow_run.conclusion == 'success'
+
     runs-on: ubuntu-latest
     permissions:
       pages: write
       id-token: write
+      actions: read
+
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
+
     steps:
       - name: Скачать код
         uses: actions/checkout@v4
+        with:
+          # берём тот же коммит, который проверял CI
+          ref: ${{ github.event.workflow_run.head_sha || github.sha }}
 
       - name: Подготовить файлы для Pages
         uses: actions/upload-pages-artifact@v3
